@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WATSUP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #d1d7db;
+    }
+
+    .chat-list {
+      width: 30%;
+      background-color: #ffffff;
+      border-right: 1px solid #e9edef;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-bar {
+      background-color: #075e54;
+      color: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .chat-item {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #f0f2f5;
+      cursor: pointer;
+    }
+
+    .chat-item:hover {
+      background-color: #f5f6f6;
+    }
+
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .chat-details {
+      margin-left: 15px;
+    }
+
+    .chat-name {
+      font-weight: 500;
+    }
+
+    .chat-message {
+      color: #667781;
+      font-size: 0.9em;
+    }
+
+    .chat-window {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #efeae2;
+    }
+
+    .chat-header {
+      background-color: #f0f2f5;
+      padding: 10px 16px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e9edef;
+    }
+
+    .chat-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-user .chat-status {
+      font-size: 12px;
+      color: #4a4a4a;
+    }
+
+    .chat-header .right-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .chat-header .right-icons img {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      max-width: 65%;
+      padding: 10px 14px;
+      margin: 8px;
+      border-radius: 8px;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .received {
+      background: white;
+      align-self: flex-start;
+    }
+
+    .sent {
+      background: #d9fdd3;
+      align-self: flex-end;
+    }
+
+    .input-area {
+      background-color: #f0f2f5;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #ccc;
+    }
+
+    .message-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      font-size: 1em;
+    }
+
+    .send-button {
+      background-color: #00a884;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .send-button:hover {
+      background-color: #008f72;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-list">
+    <div class="top-bar">WATSUP</div>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search chats..." />
+    </div>
+
+    <div class="chat-item" data-name="John Doe">
+      <div class="profile-img" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+      <div class="chat-details">
+        <div class="chat-name">John Doe</div>
+        <div class="chat-message">Hey, how are you?</div>
+      </div>
+    </div>
+    <div class="chat-item" data-name="Jane Smith">
+      <div class="profile-img" style="background-image: url('https://randomuser.me/api/portraits/women/65.jpg');"></div>
+      <div class="chat-details">
+        <div class="chat-name">Jane Smith</div>
+        <div class="chat-message">Did you see the meeting notes?</div>
+      </div>
+    </div>
+    <div class="chat-item" data-name="Team Group">
+      <div class="profile-img" style="background-image: url('https://randomuser.me/api/portraits/men/43.jpg');"></div>
+      <div class="chat-details">
+        <div class="chat-name">Team Group</div>
+        <div class="chat-message">Project deadline updated</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-window">
+    <div class="chat-header">
+      <div class="chat-user">
+        <div class="profile-img" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+        <div>
+          <div class="chat-name">John Doe</div>
+          <div class="chat-status">online</div>
+        </div>
+      </div>
+      <div class="right-icons">
+        <img src="https://img.icons8.com/ios-filled/24/000000/video-call.png" alt="Video Call" title="Video Call">
+        <img src="https://img.icons8.com/ios-filled/24/000000/phone.png" alt="Voice Call" title="Voice Call">
+      </div>
+    </div>
+
+    <div class="chat-messages">
+      <div class="message received">Hey! How's it going?</div>
+      <div class="message sent">Hi! I'm doing great, thanks for asking!</div>
+      <div class="message received">That's wonderful to hear! Any plans for the weekend?</div>
+      <div class="message sent">Just catching up on some work and maybe going hiking. You?</div>
+    </div>
+
+    <div class="input-area">
+      <input type="text" class="message-input" placeholder="Type a message">
+      <button class="send-button">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // Send message
+    document.querySelector('.send-button').addEventListener('click', function() {
+      const input = document.querySelector('.message-input');
+      const message = input.value.trim();
+      if (message) {
+        const chatMessages = document.querySelector('.chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message sent';
+        messageDiv.textContent = message;
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        input.value = '';
+      }
+    });
+
+    document.querySelector('.message-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        document.querySelector('.send-button').click();
+      }
+    });
+
+    // Chat Search
+    document.getElementById('search').addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.chat-item').forEach(item => {
+        const name = item.getAttribute('data-name').toLowerCase();
+        item.style.display = name.includes(query) ? 'flex' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
